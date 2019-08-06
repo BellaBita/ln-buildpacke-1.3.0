@@ -45,14 +45,12 @@ module JavaBuildpack
       def release
         @droplet.java_opts.add_system_property 'http.port', '$PORT'
 
-        [
-          "touch",
-          "/home/vcap/lena.log"
-        ].compact.join(' ')
-        
         @logger.debug { "######### LENA LOG #{@droplet.root} ###############" }
         
         [
+          "touch",
+          "/home/vcap/lena.log",
+          "&&"
           @droplet.java_home.as_env_var,
           @droplet.java_opts.as_env_var,
           "$PWD/#{(@droplet.sandbox + 'bin/standalone.sh').relative_path_from(@droplet.root)}",
