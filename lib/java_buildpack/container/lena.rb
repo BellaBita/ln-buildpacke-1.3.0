@@ -50,7 +50,7 @@ module JavaBuildpack
           "#{@droplet.root}/lena.log"
         ].compact.join(' ')
         
-        @logger.debug { "######### LENA LOG ###############" }
+        @logger.debug { "######### LENA LOG #{@droplet.root} ###############" }
         
         [
           @droplet.java_home.as_env_var,
