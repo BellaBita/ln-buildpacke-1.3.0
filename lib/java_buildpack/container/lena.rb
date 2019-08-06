@@ -47,7 +47,7 @@ module JavaBuildpack
 
         [
           "touch",
-          "#{@droplet.root}/lena.log"
+          "/home/vcap/lena.log"
         ].compact.join(' ')
         
         @logger.debug { "######### LENA LOG #{@droplet.root} ###############" }
