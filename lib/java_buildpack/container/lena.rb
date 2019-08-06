@@ -26,6 +26,11 @@ module JavaBuildpack
     # Encapsulates the detect, compile, and release functionality for applications running Spring Boot CLI
     # applications.
     class Lena < JavaBuildpack::Component::VersionedDependencyComponent
+      
+      def initialize(context, &version_validator)
+        super(context, &version_validator)
+        @logger = JavaBuildpack::Logging::LoggerFactory.instance.get_logger Lena
+      end
 
       # (see JavaBuildpack::Component::BaseComponent#compile)
       def compile
@@ -39,14 +44,14 @@ module JavaBuildpack
       # lena Running Shell 
       def release
         @droplet.java_opts.add_system_property 'http.port', '$PORT'
-        
+
         [
           "touch",
           "$PWD/lena.log"
         ].compact.join(' ')
         
         @logger.debug { "######### LENA LOG ###############" }
-
+        
         [
           @droplet.java_home.as_env_var,
           @droplet.java_opts.as_env_var,
@@ -54,6 +59,7 @@ module JavaBuildpack
           '-b',
           '0.0.0.0'
         ].compact.join(' ')
+        
       end
 
       protected
