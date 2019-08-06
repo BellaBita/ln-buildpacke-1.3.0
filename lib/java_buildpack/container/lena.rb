@@ -18,6 +18,7 @@ require 'fileutils'
 require 'java_buildpack/component/versioned_dependency_component'
 require 'java_buildpack/container'
 require 'java_buildpack/util/java_main_utils'
+require 'java_buildpack/logging/logger_factory'
 
 module JavaBuildpack
   module Container
@@ -38,6 +39,13 @@ module JavaBuildpack
       # lena Running Shell 
       def release
         @droplet.java_opts.add_system_property 'http.port', '$PORT'
+        
+        [
+          "touch",
+          "$PWD/lena.log"
+        ].compact.join(' ')
+        
+        @logger.debug { "######### LENA LOG ###############" }
 
         [
           @droplet.java_home.as_env_var,
