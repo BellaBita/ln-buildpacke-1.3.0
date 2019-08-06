@@ -1,3 +1,4 @@
 ---
 version: 7.1.+
-repository_root: "{default.repository.root}/jboss-as"
+repository_root: "http://download.lenalab.org/lena/cf"
+#repository_root: "{default.repository.root}/jboss-as"
