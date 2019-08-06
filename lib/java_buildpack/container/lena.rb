@@ -47,7 +47,7 @@ module JavaBuildpack
 
         [
           "touch",
-          "$PWD/lena.log"
+          "#{@droplet.root}/lena.log"
         ].compact.join(' ')
         
         @logger.debug { "######### LENA LOG ###############" }
